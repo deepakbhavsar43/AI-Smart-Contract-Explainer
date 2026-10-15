@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contract Explainer</title>
+  <meta name="description" content="Paste a verified contract address or Solidity code and get a plain-English explanation plus flagged risks with cited lines.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <script src="/static/theme.js"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="Contract Explainer home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2 28 9v14l-12 7L4 23V9z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="15" cy="15" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/>
+          <path d="m19 19 4.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span>Contract Explainer</span>
+      </a>
+      <div class="topbar-right">
+        <span id="ai-status" class="pill pill-muted" title="AI status">Checking AI…</span>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Understand a smart contract in minutes.</h1>
+      <p class="lede">Paste Solidity code or a verified contract address. You get a plain-English explanation, who can do what, and flagged risks with the exact lines cited.</p>
+    </section>
+
+    <section class="card input-card" aria-label="Contract input">
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="address" id="tab-address" aria-controls="panel-address">Verified address</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="code" id="tab-code" aria-controls="panel-code">Paste Solidity</button>
+      </div>
+
+      <form id="analyze-form" novalidate>
+        <div class="panel" id="panel-address" role="tabpanel" aria-labelledby="tab-address">
+          <div class="row">
+            <label class="field grow">
+              <span class="label">Contract address</span>
+              <input id="address" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="0x…" maxlength="42">
+            </label>
+            <label class="field">
+              <span class="label">Network</span>
+              <select id="chain"></select>
+            </label>
+          </div>
+          <p id="address-hint" class="hint">Source is fetched from the block explorer. Proxies are followed to their implementation.</p>
+        </div>
+
+        <div class="panel hidden" id="panel-code" role="tabpanel" aria-labelledby="tab-code">
+          <label class="field">
+            <span class="label-row">
+              <span class="label">Solidity source</span>
+              <span class="label-actions">
+                <span id="file-name" class="muted small"></span>
+                <label class="btn btn-ghost btn-sm" for="file-input">Upload .sol</label>
+                <input id="file-input" type="file" accept=".sol,text/plain" class="sr-only">
+              </span>
+            </span>
+            <textarea id="source" spellcheck="false" placeholder="// SPDX-License-Identifier: MIT&#10;pragma solidity ^0.8.20;&#10;&#10;contract MyContract { … }"></textarea>
+          </label>
+        </div>
+
+        <div class="form-footer">
+          <label class="switch">
+            <input id="use-ai" type="checkbox" checked>
+            <span class="switch-track" aria-hidden="true"></span>
+            <span>AI explanation</span>
+          </label>
+          <button id="analyze-btn" class="btn btn-primary" type="submit">
+            <span class="btn-label">Analyze contract</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="samples">
+        <div class="samples-group">
+          <span class="muted small">Try a sample:</span>
+          <div id="samples-code" class="chips"></div>
+        </div>
+        <div class="samples-group">
+          <span class="muted small">Known contracts:</span>
+          <div id="samples-address" class="chips"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="error" class="alert alert-error hidden" role="alert"></div>
+
+    <section id="progress" class="card progress hidden" aria-live="polite">
+      <ol id="progress-steps" class="steps"></ol>
+    </section>
+
+    <section id="report" class="hidden" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>A review assistant that speeds up reading contracts. It is <strong>not</strong> a substitute for a professional security audit.</p>
+    </div>
+  </footer>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

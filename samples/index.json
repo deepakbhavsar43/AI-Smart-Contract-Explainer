@@ -1,0 +1,10 @@
+[
+  {"id": "vulnerable-bank", "label": "Vulnerable Bank", "kind": "code", "file": "VulnerableBank.sol", "hint": "Reentrancy"},
+  {"id": "unprotected-vault", "label": "Unprotected Vault", "kind": "code", "file": "UnprotectedVault.sol", "hint": "Missing access control"},
+  {"id": "centralized-token", "label": "Centralized Token", "kind": "code", "file": "CentralizedToken.sol", "hint": "Owner powers"},
+  {"id": "safe-bank", "label": "Safe Bank (fixed)", "kind": "code", "file": "SafeBank.sol", "hint": "Clean baseline"},
+  {"id": "weth9", "label": "WETH9", "kind": "address", "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "chain": "mainnet", "hint": "Wrapped Ether"},
+  {"id": "usdc", "label": "USDC", "kind": "address", "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", "chain": "mainnet", "hint": "Proxy + blacklist"},
+  {"id": "dai", "label": "DAI", "kind": "address", "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F", "chain": "mainnet", "hint": "wards / auth"},
+  {"id": "univ2-factory", "label": "Uniswap V2 Factory", "kind": "address", "address": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f", "chain": "mainnet", "hint": "DeFi factory"}
+]
